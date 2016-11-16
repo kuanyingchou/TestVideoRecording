@@ -66,6 +66,8 @@ public class Mover : MonoBehaviour {
 
 	}
 
+
+	// ref: http://answers.unity3d.com/questions/1089052/can-i-use-everyplay-to-record-without-upload.html
 	static string GetVideoPath ()
 	{
 		#if UNITY_IOS
