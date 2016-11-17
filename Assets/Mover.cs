@@ -9,22 +9,22 @@ public class Mover : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		// Register for the Everyplay ReadyForRecording event
-		Debug.Log ("kuanying: Start() begins");
-		Debug.Log ("kuanying: is supported: " + Everyplay.IsSupported() );
-		Debug.Log ("kuanying: is recording supported: " + Everyplay.IsRecordingSupported ());
+		Log ("Start() begins");
+		Log ("is supported: " + Everyplay.IsSupported() );
+		Log ("is recording supported: " + Everyplay.IsRecordingSupported ());
 
 		Everyplay.ReadyForRecording += OnReadyForRecording;
 		Everyplay.RecordingStarted += OnRecordingStarted;
 		Everyplay.RecordingStopped += OnRecordingStopped;
-		Debug.Log ("kuanying: Start() ends");
+		Log ("Start() ends");
 
 		StartCoroutine (CheckIsSupported());
 	}
 
 	IEnumerator CheckIsSupported() {
 		yield return new WaitForSeconds(2f);
-		Debug.Log ("kuanying: is supported: " + Everyplay.IsSupported() );
-		Debug.Log ("kuanying: is recording supported: " + Everyplay.IsRecordingSupported ());
+		Log ("is supported: " + Everyplay.IsSupported() );
+		Log ("is recording supported: " + Everyplay.IsRecordingSupported ());
 	}
 
 	void Destroy() {
@@ -42,27 +42,27 @@ public class Mover : MonoBehaviour {
 
 	public void OnReadyForRecording(bool enabled) {
 		if (enabled) {
-			Debug.Log ("kuanying: is supported: " + Everyplay.IsSupported() );
-			Debug.Log ("kuanying: is recording supported: " + Everyplay.IsRecordingSupported ());
+			Log ("is supported: " + Everyplay.IsSupported() );
+			Log ("is recording supported: " + Everyplay.IsRecordingSupported ());
 			StartCoroutine (Record ());
 		} else {
-			Debug.Log ("kuanying: OnReadyForRecording with false!!!");
+			Log ("OnReadyForRecording with false!!!");
 		}
 	}
 
 	public void OnRecordingStarted() {
-		Debug.Log ("kuanying: recording started!!!");
+		Log ("recording started!!!");
 	}
 
 	public void OnRecordingStopped() {
-		Debug.Log ("kuanying: recording stopped!!!");
+		Log ("recording stopped!!!");
 	}
 
 	IEnumerator Record() {
 		Everyplay.StartRecording();
 		yield return new WaitForSeconds(3f);
 		Everyplay.StopRecording ();
-		Debug.Log ("kuanying: find video at " + GetVideoPath ());
+		Log ("find video at " + GetVideoPath ());
 
 	}
 
@@ -102,4 +102,11 @@ public class Mover : MonoBehaviour {
 
 		return videoLocation;
 	}
+
+	private static void Log(string msg) {
+		Debug.Log(msg);
+
+	}
+
+
 }
