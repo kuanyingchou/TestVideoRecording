@@ -16,6 +16,10 @@ public class Mover : MonoBehaviour {
 		Everyplay.ReadyForRecording += OnReadyForRecording;
 		Everyplay.RecordingStarted += OnRecordingStarted;
 		Everyplay.RecordingStopped += OnRecordingStopped;
+		Everyplay.UploadDidStart += OnUploadDidStart;
+		Everyplay.UploadDidProgress += OnUploadDidProgress;
+		Everyplay.UploadDidComplete += OnUploadDidComplete;
+
 		Log ("Start() ends");
 
 		StartCoroutine (CheckIsSupported());
@@ -31,8 +35,11 @@ public class Mover : MonoBehaviour {
 		Everyplay.ReadyForRecording -= OnReadyForRecording;
 		Everyplay.RecordingStarted -= OnRecordingStarted;
 		Everyplay.RecordingStopped -= OnRecordingStopped;
+		Everyplay.UploadDidStart -= OnUploadDidStart;
+		Everyplay.UploadDidProgress -= OnUploadDidProgress;
+		Everyplay.UploadDidComplete -= OnUploadDidComplete;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		elapsedTime += Time.deltaTime;
@@ -101,6 +108,16 @@ public class Mover : MonoBehaviour {
 		}
 
 		return videoLocation;
+	}
+
+	public void OnUploadDidStart(int videoId) {
+		Debug.Log("upload started");
+	}
+	public void OnUploadDidProgress(int videoId, float progress) {
+		Debug.Log("upload progress: "+progress);
+	}
+	public void OnUploadDidComplete(int videoId) {
+		Debug.Log("upload completed");
 	}
 
 	private static void Log(string msg) {
